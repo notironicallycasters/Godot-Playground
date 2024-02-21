@@ -5,8 +5,8 @@
 
 [sub_resource type="QuadMesh" id="QuadMesh_f7ywd"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_krsfp"]
-size = Vector2(45, 612)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8bp1"]
+size = Vector2(1, 1)
 
 [node name="Metal Pole" type="RigidBody2D"]
 metadata/_edit_group_ = true
@@ -18,7 +18,7 @@ mesh = SubResource("QuadMesh_f7ywd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(50, 2000)
-shape = SubResource("RectangleShape2D_krsfp")
+shape = SubResource("RectangleShape2D_k8bp1")
 
 [node name="Config" type="Node2D" parent="."]
 script = ExtResource("1_36ygt")
