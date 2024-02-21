@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://f6pm0gkpf6cc"
+path="res://.godot/imported/Bad Apple.mp3-8ffdc42b624ada0e875b36649a122055.mp3str"
+
+[deps]
+
+source_file="res://sounds/Bad Apple.mp3"
+dest_files=["res://.godot/imported/Bad Apple.mp3-8ffdc42b624ada0e875b36649a122055.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

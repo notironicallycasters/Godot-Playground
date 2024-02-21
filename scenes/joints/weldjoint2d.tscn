@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxmopp6ic0gmu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_3hmrs"]
+
+[node name="PinJoint2D" type="PinJoint2D"]
+z_index = 10
+angular_limit_enabled = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0.905882, 0.686275, 0, 1)
+scale = Vector2(40, 40)
+mesh = SubResource("QuadMesh_3hmrs")

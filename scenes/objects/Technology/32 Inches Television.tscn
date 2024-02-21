@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6qqqxiya4apx"]
+
+[ext_resource type="Script" path="res://scripts/32 Inches Television.gd" id="1_15ibn"]
+[ext_resource type="VideoStream" path="res://assets/Bad Apple.ogv" id="2_4fpud"]
+[ext_resource type="AudioStream" uid="uid://bgpibcilagos0" path="res://sounds/StaticNoise.mp3" id="2_mk8n7"]
+[ext_resource type="AudioStream" uid="uid://f6pm0gkpf6cc" path="res://sounds/Bad Apple.mp3" id="5_4kcd4"]
+[ext_resource type="Script" path="res://scripts/Config.gd" id="5_v0tgb"]
+[ext_resource type="AudioStream" uid="uid://dck5gojnl86b5" path="res://sounds/ImpactMetal.wav" id="6_5h0mc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0b24"]
+size = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rsimm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mcjo4"]
+font_size = 72
+
+[node name="32 Inches Television" type="RigidBody2D"]
+max_contacts_reported = 2
+contact_monitor = true
+script = ExtResource("1_15ibn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="."]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="Audio" type="AudioStreamPlayer" parent="Frame"]
+stream = ExtResource("5_4kcd4")
+
+[node name="VisualNoise" type="ColorRect" parent="Frame"]
+visible = false
+material = SubResource("ShaderMaterial_rsimm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+
+[node name="TVOff" type="ColorRect" parent="Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("2_mk8n7")
+max_distance = 20000.0
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Frame"]
+layout_mode = 1
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 1315.0
+offset_bottom = 740.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+stream = ExtResource("2_4fpud")
+volume_db = -80.0
+
+[node name="Config" type="Node2D" parent="."]
+script = ExtResource("5_v0tgb")
+description = "A 32\" TV that displays Bad Apple"
+impact_sound = ExtResource("6_5h0mc")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Config"]
+stream = ExtResource("6_5h0mc")
+
+[node name="Velocity" type="Label" parent="Config"]
+offset_left = -352.0
+offset_right = 352.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_mcjo4")
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="." to="Config" method="_on__inches_television_body_entered"]

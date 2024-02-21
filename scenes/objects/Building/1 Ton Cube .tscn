@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnf06w0uneemu"]
+
+[ext_resource type="Script" path="res://scripts/Config.gd" id="1_m8ihy"]
+[ext_resource type="AudioStream" uid="uid://dck5gojnl86b5" path="res://sounds/ImpactMetal.wav" id="2_nw7ig"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_n50hv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0k6k"]
+size = Vector2(1, 1)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+mass = 1000.0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(1000, 1000)
+mesh = SubResource("QuadMesh_n50hv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1000, 1000)
+shape = SubResource("RectangleShape2D_h0k6k")
+
+[node name="Config" type="Node2D" parent="."]
+script = ExtResource("1_m8ihy")
+description = "Big heavy cube"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Config"]
+stream = ExtResource("2_nw7ig")

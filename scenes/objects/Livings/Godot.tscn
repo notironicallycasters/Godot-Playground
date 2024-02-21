@@ -1,0 +1,475 @@
+[gd_scene load_steps=17 format=3 uid="uid://mcb7tcepdwud"]
+
+[ext_resource type="Script" path="res://scripts/Head.gd" id="1_6bsug"]
+[ext_resource type="Texture2D" uid="uid://csnehccfr0235" path="res://assets/Head.png" id="1_sy5yi"]
+[ext_resource type="Script" path="res://scripts/Arm.gd" id="3_2yply"]
+[ext_resource type="Script" path="res://scripts/Config.gd" id="3_46r55"]
+[ext_resource type="AudioStream" uid="uid://dck5gojnl86b5" path="res://sounds/ImpactMetal.wav" id="5_gfb2m"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_myyca"]
+radius = 161.0
+height = 372.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uneet"]
+size = Vector2(225, 225)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q7gf2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qx4j"]
+size = Vector2(225, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7nfx"]
+size = Vector2(125, 296)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3dcq6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpaen"]
+size = Vector2(125, 425)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6jq8"]
+size = Vector2(100, 75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2hbv"]
+size = Vector2(125, 400)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tyxmv"]
+radius = 78.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_fjaxu"]
+
+[node name="Godot" type="Node2D"]
+
+[node name="Head" type="RigidBody2D" parent="."]
+position = Vector2(0, -801)
+mass = 5.0
+script = ExtResource("1_6bsug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+position = Vector2(0, 3.00003)
+shape = SubResource("CapsuleShape2D_myyca")
+
+[node name="Sprite2D" type="Sprite2D" parent="Head"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_sy5yi")
+
+[node name="Body1" type="RigidBody2D" parent="."]
+position = Vector2(0, -488)
+mass = 20.0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body1"]
+shape = SubResource("RectangleShape2D_uneet")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Body1"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+position = Vector2(-0.5, 33)
+scale = Vector2(227, 146)
+mesh = SubResource("CapsuleMesh_q7gf2")
+
+[node name="Body2" type="RigidBody2D" parent="."]
+position = Vector2(0, -263)
+mass = 13.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body2"]
+shape = SubResource("RectangleShape2D_uneet")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Body2"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+position = Vector2(-0.5, 9.00002)
+scale = Vector2(227, 210)
+mesh = SubResource("CapsuleMesh_q7gf2")
+
+[node name="Body3" type="RigidBody2D" parent="."]
+position = Vector2(0, -1)
+mass = 13.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body3"]
+shape = SubResource("RectangleShape2D_0qx4j")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Body3"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+position = Vector2(-0.5, -34)
+scale = Vector2(227, 213)
+mesh = SubResource("CapsuleMesh_q7gf2")
+
+[node name="Leg1" type="RigidBody2D" parent="."]
+z_index = -1
+position = Vector2(0, 224)
+collision_layer = 0
+collision_mask = 5
+mass = 10.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leg1"]
+shape = SubResource("RectangleShape2D_v7nfx")
+
+[node name="ColorRect" type="ColorRect" parent="Leg1"]
+modulate = Color(0.258824, 0.529412, 0.721569, 1)
+offset_left = -62.0
+offset_top = -200.0
+offset_right = 62.0
+offset_bottom = 200.0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Leg1"]
+modulate = Color(0.258824, 0.529412, 0.721569, 1)
+position = Vector2(0.5, -134)
+scale = Vector2(125, 125)
+mesh = SubResource("CapsuleMesh_3dcq6")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Leg1"]
+modulate = Color(0.258824, 0.529412, 0.721569, 1)
+position = Vector2(0.5, 138)
+scale = Vector2(125, 125)
+mesh = SubResource("CapsuleMesh_3dcq6")
+
+[node name="Leg2" type="RigidBody2D" parent="."]
+z_index = -1
+position = Vector2(0, 636)
+collision_layer = 0
+collision_mask = 9
+mass = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leg2"]
+shape = SubResource("RectangleShape2D_xpaen")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Leg2"]
+position = Vector2(112, 175)
+shape = SubResource("RectangleShape2D_v6jq8")
+
+[node name="ColorRect" type="ColorRect" parent="Leg2"]
+modulate = Color(0.258824, 0.529412, 0.721569, 1)
+offset_left = -62.0
+offset_top = -213.0
+offset_right = 62.0
+offset_bottom = 212.0
+
+[node name="ColorRect2" type="ColorRect" parent="Leg2"]
+modulate = Color(0.258824, 0.529412, 0.721569, 1)
+offset_left = -62.0
+offset_top = 137.0
+offset_right = 162.0
+offset_bottom = 212.0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Leg2"]
+modulate = Color(0.258824, 0.529412, 0.721569, 1)
+position = Vector2(0.5, -134)
+scale = Vector2(125, 125)
+mesh = SubResource("CapsuleMesh_3dcq6")
+
+[node name="RayCast2D" type="RayCast2D" parent="Leg2"]
+position = Vector2(50, 213)
+scale = Vector2(160, 160)
+target_position = Vector2(0, 1)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Leg2"]
+position = Vector2(50, 175)
+rotation = 1.5708
+scale = Vector2(160, 160)
+target_position = Vector2(0, 1)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Leg2"]
+position = Vector2(62, 175)
+rotation = -1.5708
+scale = Vector2(160, 160)
+target_position = Vector2(0, 1)
+
+[node name="Leg3" type="RigidBody2D" parent="."]
+modulate = Color(0.8, 0.8, 0.8, 1)
+z_index = -2
+position = Vector2(0, 224)
+collision_layer = 0
+collision_mask = 5
+mass = 10.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leg3"]
+shape = SubResource("RectangleShape2D_v7nfx")
+
+[node name="ColorRect" type="ColorRect" parent="Leg3"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+offset_left = -62.0
+offset_top = -200.0
+offset_right = 62.0
+offset_bottom = 200.0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Leg3"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+position = Vector2(0.5, -134)
+scale = Vector2(125, 125)
+mesh = SubResource("CapsuleMesh_3dcq6")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Leg3"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+position = Vector2(0.5, 138)
+scale = Vector2(125, 125)
+mesh = SubResource("CapsuleMesh_3dcq6")
+
+[node name="Leg4" type="RigidBody2D" parent="."]
+modulate = Color(0.8, 0.8, 0.8, 1)
+z_index = -2
+position = Vector2(0, 636)
+collision_layer = 0
+collision_mask = 9
+mass = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leg4"]
+shape = SubResource("RectangleShape2D_xpaen")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Leg4"]
+position = Vector2(112, 175)
+shape = SubResource("RectangleShape2D_v6jq8")
+
+[node name="ColorRect" type="ColorRect" parent="Leg4"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+offset_left = -62.0
+offset_top = -213.0
+offset_right = 62.0
+offset_bottom = 212.0
+
+[node name="ColorRect2" type="ColorRect" parent="Leg4"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+offset_left = -62.0
+offset_top = 137.0
+offset_right = 162.0
+offset_bottom = 212.0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Leg4"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+position = Vector2(0.5, -134)
+scale = Vector2(125, 125)
+mesh = SubResource("CapsuleMesh_3dcq6")
+
+[node name="RayCast2D" type="RayCast2D" parent="Leg4"]
+position = Vector2(50, 213)
+scale = Vector2(160, 160)
+target_position = Vector2(0, 1)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Leg4"]
+position = Vector2(50, 175)
+rotation = 1.5708
+scale = Vector2(160, 160)
+target_position = Vector2(0, 1)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Leg4"]
+position = Vector2(62, 175)
+rotation = -1.5708
+scale = Vector2(160, 160)
+target_position = Vector2(0, 1)
+
+[node name="Arm1" type="RigidBody2D" parent="."]
+z_index = 1
+position = Vector2(0, -312)
+collision_layer = 0
+collision_mask = 8
+mass = 10.5
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm1"]
+position = Vector2(0, -63)
+shape = SubResource("RectangleShape2D_i2hbv")
+
+[node name="Line2D" type="Line2D" parent="Arm1"]
+points = PackedVector2Array(0, -200, 0, 70)
+width = 125.0
+default_color = Color(0.258824, 0.529412, 0.721569, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Arm2" type="RigidBody2D" parent="."]
+z_index = 1
+position = Vector2(0, -41)
+collision_layer = 0
+collision_mask = 4
+mass = 6.0
+script = ExtResource("3_2yply")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm2"]
+position = Vector2(0, -63)
+shape = SubResource("RectangleShape2D_i2hbv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Arm2"]
+position = Vector2(0, 100)
+shape = SubResource("CircleShape2D_tyxmv")
+
+[node name="Line2D" type="Line2D" parent="Arm2"]
+points = PackedVector2Array(0, -200, 0, 70)
+width = 125.0
+default_color = Color(0.258824, 0.529412, 0.721569, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Arm2"]
+modulate = Color(0.258824, 0.529412, 0.721569, 1)
+position = Vector2(0, 100)
+scale = Vector2(155, 155)
+mesh = SubResource("SphereMesh_fjaxu")
+
+[node name="Hand" type="PinJoint2D" parent="Arm2"]
+position = Vector2(0, 100)
+node_a = NodePath("..")
+angular_limit_enabled = true
+
+[node name="Area2D" type="Area2D" parent="Arm2"]
+position = Vector2(0, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm2/Area2D"]
+shape = SubResource("CircleShape2D_tyxmv")
+
+[node name="Arm3" type="RigidBody2D" parent="."]
+modulate = Color(0.8, 0.8, 0.8, 1)
+z_index = -1
+position = Vector2(0, -312)
+collision_layer = 0
+collision_mask = 8
+mass = 10.5
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm3"]
+position = Vector2(0, -63)
+shape = SubResource("RectangleShape2D_i2hbv")
+
+[node name="Line2D" type="Line2D" parent="Arm3"]
+points = PackedVector2Array(0, -200, 0, 70)
+width = 125.0
+default_color = Color(0.184314, 0.411765, 0.572549, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Arm4" type="RigidBody2D" parent="."]
+modulate = Color(0.8, 0.8, 0.8, 1)
+z_index = -1
+position = Vector2(0, -41)
+collision_layer = 0
+collision_mask = 4
+mass = 6.0
+script = ExtResource("3_2yply")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm4"]
+position = Vector2(0, -63)
+shape = SubResource("RectangleShape2D_i2hbv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Arm4"]
+position = Vector2(0, 100)
+shape = SubResource("CircleShape2D_tyxmv")
+
+[node name="Line2D" type="Line2D" parent="Arm4"]
+points = PackedVector2Array(0, -200, 0, 70)
+width = 125.0
+default_color = Color(0.184314, 0.411765, 0.572549, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Arm4"]
+modulate = Color(0.184314, 0.411765, 0.572549, 1)
+position = Vector2(0, 100)
+scale = Vector2(155, 155)
+mesh = SubResource("SphereMesh_fjaxu")
+
+[node name="Hand" type="PinJoint2D" parent="Arm4"]
+position = Vector2(0, 100)
+node_a = NodePath("..")
+angular_limit_enabled = true
+
+[node name="Area2D" type="Area2D" parent="Arm4"]
+position = Vector2(0, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm4/Area2D"]
+shape = SubResource("CircleShape2D_tyxmv")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, -613)
+scale = Vector2(2, 2)
+node_a = NodePath("../Head")
+node_b = NodePath("../Body1")
+disable_collision = false
+softness = 0.05
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2(0, -375)
+scale = Vector2(2, 2)
+node_a = NodePath("../Body1")
+node_b = NodePath("../Body2")
+disable_collision = false
+softness = 0.05
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="."]
+position = Vector2(0, -151)
+scale = Vector2(2, 2)
+node_a = NodePath("../Body2")
+node_b = NodePath("../Body3")
+disable_collision = false
+softness = 0.05
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="."]
+position = Vector2(0, 81)
+scale = Vector2(2, 2)
+node_a = NodePath("../Body3")
+node_b = NodePath("../Leg1")
+softness = 0.05
+angular_limit_enabled = true
+angular_limit_lower = -1.5708
+
+[node name="PinJoint2D5" type="PinJoint2D" parent="."]
+position = Vector2(0, 424)
+scale = Vector2(2, 2)
+node_a = NodePath("../Leg1")
+node_b = NodePath("../Leg2")
+softness = 0.05
+angular_limit_enabled = true
+angular_limit_upper = 1.5708
+
+[node name="PinJoint2D6" type="PinJoint2D" parent="."]
+position = Vector2(0, 81)
+scale = Vector2(2, 2)
+node_a = NodePath("../Body3")
+node_b = NodePath("../Leg3")
+softness = 0.05
+angular_limit_enabled = true
+angular_limit_lower = -1.5708
+
+[node name="PinJoint2D7" type="PinJoint2D" parent="."]
+position = Vector2(0, 424)
+scale = Vector2(2, 2)
+node_a = NodePath("../Leg3")
+node_b = NodePath("../Leg4")
+softness = 0.05
+angular_limit_enabled = true
+angular_limit_upper = 1.5708
+
+[node name="PinJoint2D8" type="PinJoint2D" parent="."]
+position = Vector2(0, -488)
+node_a = NodePath("../Body1")
+node_b = NodePath("../Arm1")
+angular_limit_upper = 3.14159
+
+[node name="PinJoint2D9" type="PinJoint2D" parent="."]
+position = Vector2(0, -488)
+node_a = NodePath("../Body1")
+node_b = NodePath("../Arm3")
+angular_limit_upper = 3.14159
+
+[node name="PinJoint2D10" type="PinJoint2D" parent="."]
+position = Vector2(0, -260)
+node_a = NodePath("../Arm1")
+node_b = NodePath("../Arm2")
+angular_limit_enabled = true
+angular_limit_upper = 1.5708
+
+[node name="PinJoint2D11" type="PinJoint2D" parent="."]
+position = Vector2(0, -260)
+node_a = NodePath("../Arm3")
+node_b = NodePath("../Arm4")
+angular_limit_enabled = true
+angular_limit_upper = 1.5708
+
+[node name="Config" type="Node2D" parent="."]
+script = ExtResource("3_46r55")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Config"]
+stream = ExtResource("5_gfb2m")
+
+[connection signal="body_entered" from="Arm2/Area2D" to="Arm2" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Arm2/Area2D" to="Arm2" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Arm4/Area2D" to="Arm4" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Arm4/Area2D" to="Arm4" method="_on_area_2d_body_exited"]

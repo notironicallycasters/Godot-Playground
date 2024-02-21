@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxv2jrxjhud7r"]
+
+[ext_resource type="Script" path="res://scripts/Line2D.gd" id="1_snrbj"]
+
+[node name="PinJoint2D" type="PinJoint2D"]
+node_b = NodePath("RigidBody2D")
+
+[node name="GrooveJoint2D" type="GrooveJoint2D" parent="."]
+node_a = NodePath("../RigidBody2D")
+node_b = NodePath("../RigidBody2D2")
+disable_collision = false
+initial_offset = 1.0
+
+[node name="Line2D" type="Line2D" parent="GrooveJoint2D"]
+script = ExtResource("1_snrbj")
+
+[node name="Obj1" type="Node2D" parent="GrooveJoint2D"]
+
+[node name="Obj2" type="Node2D" parent="GrooveJoint2D"]
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_b = NodePath("../RigidBody2D2")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]

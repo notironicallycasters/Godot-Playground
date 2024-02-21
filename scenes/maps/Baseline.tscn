@@ -1,0 +1,880 @@
+[gd_scene load_steps=31 format=3 uid="uid://b6ern7b3c6sk"]
+
+[ext_resource type="FontFile" uid="uid://c5sc82cyc24ae" path="res://fonts/CorwinCollege.otf" id="2_dj3hu"]
+[ext_resource type="Script" path="res://scripts/Camera2D.gd" id="2_hgvlv"]
+[ext_resource type="Script" path="res://scripts/Select.gd" id="2_mfapq"]
+[ext_resource type="Script" path="res://scenes/maps/UI.gd" id="2_n5q63"]
+[ext_resource type="AudioStream" uid="uid://cmws3folv3wh8" path="res://sounds/Select.wav" id="3_7efuf"]
+[ext_resource type="Texture2D" uid="uid://bwu5nptx27jre" path="res://assets/ToolSelect.svg" id="3_stcpi"]
+[ext_resource type="Script" path="res://scripts/SelectSFX.gd" id="4_45w50"]
+[ext_resource type="Texture2D" uid="uid://cljlkxv25q1d5" path="res://assets/PinJoint2D.svg" id="4_ejk21"]
+[ext_resource type="Script" path="res://scripts/FPS.gd" id="6_6caig"]
+[ext_resource type="Shader" path="res://shaders/Grid.gdshader" id="6_q7cs3"]
+[ext_resource type="Script" path="res://scripts/ToolList.gd" id="6_r8kd7"]
+[ext_resource type="Script" path="res://scripts/Cursor.gd" id="7_fv3fm"]
+[ext_resource type="Texture2D" uid="uid://in448qoxe83s" path="res://addons/godot-box2d/WeldJoint2D.svg" id="8_2d05o"]
+[ext_resource type="Texture2D" uid="uid://cl7sm40iyvbb2" path="res://assets/icon.svg" id="8_eatlj"]
+[ext_resource type="Script" path="res://scripts/JointCreator.gd" id="8_hvdgo"]
+[ext_resource type="AudioStream" uid="uid://cvdempinlwhur" path="res://sounds/BrownianNoise.mp3" id="14_inaaa"]
+[ext_resource type="AudioStream" uid="uid://bgpibcilagos0" path="res://sounds/StaticNoise.mp3" id="15_une8o"]
+[ext_resource type="AudioStream" uid="uid://wio37yf2qnx5" path="res://sounds/Floodlight.wav" id="16_f4hgq"]
+[ext_resource type="Script" path="res://scripts/Floodlights.gd" id="17_s4cv8"]
+[ext_resource type="Script" path="res://scripts/Config.gd" id="18_m1p5l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypfsi"]
+shader = ExtResource("6_q7cs3")
+shader_parameter/size = Vector2(1000, 1000)
+shader_parameter/line_width = 0.1
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/grid_size = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_okjr8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63v4q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_decc8"]
+font = ExtResource("2_dj3hu")
+font_size = 18
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mwabs"]
+radius = 25.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0okwr"]
+size = Vector2(1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_yxwqt"]
+
+[sub_resource type="Environment" id="Environment_4m6fl"]
+background_mode = 3
+tonemap_mode = 2
+glow_strength = 2.0
+glow_blend_mode = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0b24"]
+size = Vector2(1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pl0en"]
+font = ExtResource("2_dj3hu")
+font_size = 80
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BG" type="Node2D" parent="."]
+z_index = -10
+
+[node name="Grid" type="ColorRect" parent="BG"]
+offset_left = -500000.0
+offset_top = -500000.0
+offset_right = 500000.0
+offset_bottom = 500000.0
+mouse_filter = 2
+color = Color(0.133333, 0.141176, 0.156863, 1)
+
+[node name="Wall" type="ColorRect" parent="BG"]
+modulate = Color(0.12549, 0.129412, 0.14902, 1)
+material = SubResource("ShaderMaterial_ypfsi")
+offset_left = -500000.0
+offset_top = -500000.0
+offset_right = 500000.0
+offset_bottom = 500000.0
+mouse_filter = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("2_n5q63")
+
+[node name="Select" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource("3_7efuf")
+
+[node name="ObjectList" type="TabContainer" parent="UI"]
+offset_right = 492.0
+offset_bottom = 812.0
+theme_override_fonts/font = ExtResource("2_dj3hu")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_okjr8")
+clip_tabs = false
+script = ExtResource("4_45w50")
+
+[node name="Building" type="ItemList" parent="UI/ObjectList"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_dj3hu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_63v4q")
+allow_reselect = true
+item_count = 1
+item_0/text = ""
+script = ExtResource("2_mfapq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Cold weapons" type="ItemList" parent="UI/ObjectList"]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_dj3hu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_63v4q")
+allow_reselect = true
+script = ExtResource("2_mfapq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Firearms" type="ItemList" parent="UI/ObjectList"]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_dj3hu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_63v4q")
+allow_reselect = true
+script = ExtResource("2_mfapq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Livings" type="ItemList" parent="UI/ObjectList"]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_dj3hu")
+allow_reselect = true
+script = ExtResource("2_mfapq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Technology" type="ItemList" parent="UI/ObjectList"]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_dj3hu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_63v4q")
+allow_reselect = true
+script = ExtResource("2_mfapq")
+metadata/_edit_use_anchors_ = true
+
+[node name="ToolList" type="ItemList" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.126736
+anchor_right = 0.176215
+anchor_bottom = 0.260802
+offset_left = -251.0
+offset_top = 1030.0
+offset_right = -127.0
+offset_bottom = 914.0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_63v4q")
+allow_reselect = true
+item_count = 3
+max_columns = 3
+icon_scale = 0.3
+item_0/text = ""
+item_0/icon = ExtResource("3_stcpi")
+item_1/text = ""
+item_1/icon = ExtResource("4_ejk21")
+item_2/text = ""
+item_2/icon = ExtResource("8_2d05o")
+script = ExtResource("6_r8kd7")
+
+[node name="FPS" type="Label" parent="UI/ToolList"]
+layout_mode = 0
+offset_left = 0.00012207
+offset_top = 164.0
+offset_right = 73.0001
+offset_bottom = 190.0
+text = "FPS: 60e"
+label_settings = SubResource("LabelSettings_decc8")
+script = ExtResource("6_6caig")
+
+[node name="Description" type="Label" parent="UI"]
+offset_top = 812.0
+offset_right = 492.0
+offset_bottom = 1011.0
+theme_override_fonts/font = ExtResource("2_dj3hu")
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="UI/Description"]
+z_index = -1
+layout_mode = 0
+offset_right = 492.0
+offset_bottom = 343.0
+color = Color(0, 0, 0, 1)
+
+[node name="Cursor" type="CharacterBody2D" parent="."]
+script = ExtResource("7_fv3fm")
+metadata/_edit_group_ = true
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Cursor"]
+node_a = NodePath("..")
+
+[node name="Area2D" type="Area2D" parent="Cursor"]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor/Area2D"]
+shape = SubResource("CircleShape2D_mwabs")
+
+[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
+visible = false
+texture = ExtResource("8_eatlj")
+
+[node name="JointCreator" type="Node2D" parent="."]
+script = ExtResource("8_hvdgo")
+
+[node name="Sprite2D" type="Sprite2D" parent="JointCreator"]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_eatlj")
+
+[node name="Area2D" type="Area2D" parent="JointCreator"]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JointCreator/Area2D"]
+shape = SubResource("CircleShape2D_mwabs")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+z_index = 10
+position = Vector2(0, 50000)
+scale = Vector2(1e+06, 100000)
+collision_layer = 13
+collision_mask = 13
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_0okwr")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Floor"]
+modulate = Color(0.0313726, 0.0313726, 0.0313726, 1)
+mesh = SubResource("QuadMesh_yxwqt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+z_index = 100
+position = Vector2(0, -1400)
+zoom = Vector2(1.6, 1.6)
+position_smoothing_enabled = true
+script = ExtResource("2_hgvlv")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera2D"]
+stream = ExtResource("14_inaaa")
+autoplay = true
+bus = &"Ambient"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4m6fl")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="WorldEnvironment"]
+color = Color(0.72549, 0.72549, 0.72549, 1)
+blend_mode = 2
+
+[node name="Tutorial" type="Node2D" parent="."]
+position = Vector2(0, -1400)
+metadata/_edit_group_ = true
+
+[node name="32 Inches Television" type="RigidBody2D" parent="Tutorial"]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Scroll to zoom"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="32 Inches Television2" type="RigidBody2D" parent="Tutorial"]
+position = Vector2(-355, 400)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television2"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television2"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television2/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television2/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television2/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MMB to pan"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television2"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="32 Inches Television3" type="RigidBody2D" parent="Tutorial"]
+position = Vector2(355, 400)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television3"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television3"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television3/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television3/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television3/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "LMB to drag"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television3"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="32 Inches Television4" type="RigidBody2D" parent="Tutorial"]
+position = Vector2(-710, 800)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television4"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television4"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television4/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television4/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television4/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A/D to rotate"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television4"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="32 Inches Television5" type="RigidBody2D" parent="Tutorial"]
+position = Vector2(0, 800)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television5"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television5"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television5/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television5/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television5/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "S to lock
+rotation"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television5"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="32 Inches Television6" type="RigidBody2D" parent="Tutorial"]
+position = Vector2(710, 800)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television6"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television6"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television6/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television6/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television6/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "F to freeze"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television6"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="32 Inches Television7" type="RigidBody2D" parent="Tutorial"]
+position = Vector2(-1065, 1200)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television7"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television7"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television7/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television7/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television7/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "E to spawn"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television7"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="32 Inches Television8" type="RigidBody2D" parent="Tutorial"]
+position = Vector2(-355, 1200)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television8"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television8"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television8/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television8/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television8/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Q to flip"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television8"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="32 Inches Television9" type="RigidBody2D" parent="Tutorial"]
+position = Vector2(355, 1200)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television9"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television9"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television9/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television9/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television9/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Backspace to
+delete
+X to clear all"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television9"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="32 Inches Television10" type="RigidBody2D" parent="Tutorial"]
+position = Vector2(1065, 1200)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/32 Inches Television10"]
+scale = Vector2(710, 400)
+shape = SubResource("RectangleShape2D_k0b24")
+
+[node name="Frame" type="ColorRect" parent="Tutorial/32 Inches Television10"]
+offset_left = -355.0
+offset_top = -200.0
+offset_right = 355.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television10/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 605.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="Tutorial/32 Inches Television10/Frame"]
+position = Vector2(355, 200)
+stream = ExtResource("15_une8o")
+max_distance = 20000.0
+
+[node name="Label" type="Label" parent="Tutorial/32 Inches Television10/Frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -46.0
+offset_right = 296.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RMB to
+activate"
+label_settings = SubResource("LabelSettings_pl0en")
+horizontal_alignment = 1
+
+[node name="Config" type="Node2D" parent="Tutorial/32 Inches Television10"]
+script = ExtResource("18_m1p5l")
+description = "The mascot of the godot engine. He can be used for all sort of experiements"
+
+[node name="Intro" type="Node2D" parent="."]
+
+[node name="LightOff" type="ColorRect" parent="Intro"]
+z_index = 100
+offset_left = -500000.0
+offset_top = -500000.0
+offset_right = 500000.0
+offset_bottom = 500000.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Intro"]
+stream = ExtResource("16_f4hgq")
+volume_db = -16.0
+
+[node name="Timer" type="Timer" parent="Intro"]
+one_shot = true
+autostart = true
+script = ExtResource("17_s4cv8")
+
+[connection signal="tab_selected" from="UI/ObjectList" to="UI/ObjectList" method="_on_tab_selected"]
+[connection signal="item_selected" from="UI/ObjectList/Building" to="UI/ObjectList/Building" method="_on_item_selected"]
+[connection signal="item_selected" from="UI/ObjectList/Cold weapons" to="UI/ObjectList/Cold weapons" method="_on_item_selected"]
+[connection signal="item_selected" from="UI/ObjectList/Firearms" to="UI/ObjectList/Firearms" method="_on_item_selected"]
+[connection signal="item_selected" from="UI/ObjectList/Livings" to="UI/ObjectList/Livings" method="_on_item_selected"]
+[connection signal="item_selected" from="UI/ObjectList/Technology" to="UI/ObjectList/Technology" method="_on_item_selected"]
+[connection signal="item_selected" from="UI/ToolList" to="UI/ToolList" method="_on_item_selected"]
+[connection signal="body_entered" from="Cursor/Area2D" to="Cursor" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Cursor/Area2D" to="Cursor" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="JointCreator/Area2D" to="JointCreator" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="JointCreator/Area2D" to="JointCreator" method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Intro/Timer" to="Intro/Timer" method="_on_timeout"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkcwthols51ji"]
+
+[ext_resource type="Script" path="res://scripts/Line2D.gd" id="1_rg0a1"]
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D"]
+disable_collision = false
+length = 100.0
+
+[node name="Line2D" type="Line2D" parent="."]
+script = ExtResource("1_rg0a1")
+
+[node name="Obj1" type="Node2D" parent="."]
+
+[node name="Obj2" type="Node2D" parent="."]

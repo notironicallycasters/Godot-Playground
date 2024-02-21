@@ -1,0 +1,135 @@
+[gd_scene load_steps=18 format=3 uid="uid://cuq8j1x8pxahc"]
+
+[ext_resource type="Texture2D" uid="uid://d0pjmsrn26y13" path="res://assets/Fichier 2.svg" id="1_5tigv"]
+[ext_resource type="Script" path="res://scripts/AK-47.gd" id="1_ijnw6"]
+[ext_resource type="Script" path="res://scripts/Config.gd" id="3_ubxce"]
+[ext_resource type="AudioStream" uid="uid://dck5gojnl86b5" path="res://sounds/ImpactMetal.wav" id="4_odlov"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_akhw3"]
+
+[sub_resource type="Gradient" id="Gradient_4gpmh"]
+offsets = PackedFloat32Array(0, 0.946701, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_54nrk"]
+gradient = SubResource("Gradient_4gpmh")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uidtp"]
+size = Vector2(221, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcj5c"]
+size = Vector2(418, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y36n0"]
+size = Vector2(152.35, 94.5392)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3dpo"]
+size = Vector2(80.8089, 55.7273)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcrue"]
+size = Vector2(47.5204, 115.953)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ex41"]
+size = Vector2(66.0115, 75.0559)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33sew"]
+size = Vector2(66.0115, 47.1889)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptj2y"]
+size = Vector2(136, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2vmp"]
+size = Vector2(37, 42.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ki2cb"]
+size = Vector2(291, 45.25)
+
+[node name="AK-47" type="RigidBody2D"]
+mass = 4.5
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_ijnw6")
+
+[node name="Light" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1.50196, 1.50196, 1.50196, 1)
+self_modulate = Color(1, 0.537255, 0.0784314, 0.188235)
+material = SubResource("ShaderMaterial_akhw3")
+position = Vector2(435, -81)
+scale = Vector2(200, 200)
+texture = SubResource("GradientTexture2D_54nrk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(324.5, -75.5)
+shape = SubResource("RectangleShape2D_uidtp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(5, -77)
+shape = SubResource("RectangleShape2D_pcj5c")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-355.719, -19.4082)
+rotation = -0.174533
+shape = SubResource("RectangleShape2D_y36n0")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-241.066, -44.8737)
+rotation = -0.174533
+shape = SubResource("RectangleShape2D_t3dpo")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(-171.228, 8.98573)
+rotation = 0.226893
+shape = SubResource("RectangleShape2D_rcrue")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(-10.5, 1.78814e-07)
+rotation = -0.322886
+shape = SubResource("RectangleShape2D_7ex41")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(17.2637, 54.8387)
+rotation = -0.602139
+shape = SubResource("RectangleShape2D_7ex41")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+position = Vector2(52.3546, 93.3234)
+rotation = -0.837758
+shape = SubResource("RectangleShape2D_33sew")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="."]
+position = Vector2(-77, -25.5)
+shape = SubResource("RectangleShape2D_ptj2y")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="."]
+position = Vector2(405.5, -110.75)
+shape = SubResource("RectangleShape2D_l2vmp")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="."]
+position = Vector2(181.5, -102.375)
+shape = SubResource("RectangleShape2D_ki2cb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("1_5tigv")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(435, -81)
+scale = Vector2(4, 4)
+enabled = false
+target_position = Vector2(400000, 0)
+
+[node name="Config" type="Node2D" parent="."]
+script = ExtResource("3_ubxce")
+description = "The classic and most iconic rifle of Mikhail Kalashnikov"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Config"]
+stream = ExtResource("4_odlov")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

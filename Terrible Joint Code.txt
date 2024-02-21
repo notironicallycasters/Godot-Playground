@@ -1,0 +1,31 @@
+	if get_parent().get_node("CanvasLayer/ToolList").selected == 2:
+		position = get_global_mouse_position()
+		if Input.is_action_just_pressed("left_click"):
+			obj1 = currentobj
+			pos1 = get_global_mouse_position()
+		if Input.is_action_just_released("left_click"):
+			obj2 = currentobj
+			pos2 = get_global_mouse_position()
+			if obj1 and obj2 and not obj1 == obj2:
+				var spring = springpath.instantiate()
+				obj1.add_child(spring)
+				spring.global_position = pos1
+				spring.length = obj1.global_position.distance_to(obj2.position)/2
+				spring.node_a = obj1.get_path()
+				spring.node_b = obj2.get_path()
+	if get_parent().get_node("CanvasLayer/ToolList").selected == 3:
+		position = get_global_mouse_position()
+		if Input.is_action_just_pressed("left_click"):
+			obj1 = currentobj
+			pos1 = get_global_mouse_position()
+		if Input.is_action_just_released("left_click"):
+			obj2 = currentobj
+			pos2 = get_global_mouse_position()
+			if obj1 and obj2 and not obj1 == obj2:
+				var groove = groovepath.instantiate()
+				obj1.add_child(groove)
+				groove.global_position = pos1
+				groove.get_child(0).length = obj1.global_position.distance_to(obj2.position)/2
+				groove.node_a = obj1.get_path()
+				groove.get_child(1).node_a = obj2.get_path()
+
