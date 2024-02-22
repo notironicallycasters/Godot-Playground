@@ -28,13 +28,13 @@ shader_parameter/line_width = 0.1
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/grid_size = 1.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_okjr8"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63v4q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_decc8"]
 font = ExtResource("2_dj3hu")
 font_size = 18
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_okjr8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mwabs"]
 radius = 25.0
@@ -84,6 +84,41 @@ script = ExtResource("2_n5q63")
 
 [node name="Select" type="AudioStreamPlayer" parent="UI"]
 stream = ExtResource("3_7efuf")
+
+[node name="ToolList" type="ItemList" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.126736
+anchor_right = 0.176215
+anchor_bottom = 0.260802
+offset_left = -251.333
+offset_top = 1030.0
+offset_right = 152.667
+offset_bottom = 914.334
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_63v4q")
+allow_reselect = true
+item_count = 3
+max_columns = 3
+icon_scale = 0.3
+item_0/text = ""
+item_0/icon = ExtResource("3_stcpi")
+item_1/text = ""
+item_1/icon = ExtResource("4_ejk21")
+item_2/text = ""
+item_2/icon = ExtResource("8_2d05o")
+script = ExtResource("6_r8kd7")
+
+[node name="FPS" type="Label" parent="UI/ToolList"]
+z_index = 100
+layout_mode = 0
+offset_left = 291.0
+offset_top = 17.0
+offset_right = 375.0
+offset_bottom = 38.0
+text = "FPS: 60"
+label_settings = SubResource("LabelSettings_decc8")
+script = ExtResource("6_6caig")
 
 [node name="ObjectList" type="TabContainer" parent="UI"]
 offset_right = 492.0
@@ -143,40 +178,6 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_63v4q")
 allow_reselect = true
 script = ExtResource("2_mfapq")
 metadata/_edit_use_anchors_ = true
-
-[node name="ToolList" type="ItemList" parent="UI"]
-anchors_preset = -1
-anchor_left = 0.126736
-anchor_right = 0.176215
-anchor_bottom = 0.260802
-offset_left = -251.0
-offset_top = 1030.0
-offset_right = -127.0
-offset_bottom = 914.0
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_63v4q")
-allow_reselect = true
-item_count = 3
-max_columns = 3
-icon_scale = 0.3
-item_0/text = ""
-item_0/icon = ExtResource("3_stcpi")
-item_1/text = ""
-item_1/icon = ExtResource("4_ejk21")
-item_2/text = ""
-item_2/icon = ExtResource("8_2d05o")
-script = ExtResource("6_r8kd7")
-
-[node name="FPS" type="Label" parent="UI/ToolList"]
-layout_mode = 0
-offset_left = 0.00012207
-offset_top = 164.0
-offset_right = 73.0001
-offset_bottom = 190.0
-text = "FPS: 60e"
-label_settings = SubResource("LabelSettings_decc8")
-script = ExtResource("6_6caig")
 
 [node name="Description" type="Label" parent="UI"]
 offset_top = 812.0
@@ -851,9 +852,9 @@ description = "The mascot of the godot engine. He can be used for all sort of ex
 [node name="LightOff" type="ColorRect" parent="Intro"]
 z_index = 100
 offset_left = -500000.0
-offset_top = -500000.0
+offset_top = -500008.0
 offset_right = 500000.0
-offset_bottom = 500000.0
+offset_bottom = 499992.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
@@ -866,13 +867,13 @@ one_shot = true
 autostart = true
 script = ExtResource("17_s4cv8")
 
+[connection signal="item_selected" from="UI/ToolList" to="UI/ToolList" method="_on_item_selected"]
 [connection signal="tab_selected" from="UI/ObjectList" to="UI/ObjectList" method="_on_tab_selected"]
 [connection signal="item_selected" from="UI/ObjectList/Building" to="UI/ObjectList/Building" method="_on_item_selected"]
 [connection signal="item_selected" from="UI/ObjectList/Cold weapons" to="UI/ObjectList/Cold weapons" method="_on_item_selected"]
 [connection signal="item_selected" from="UI/ObjectList/Firearms" to="UI/ObjectList/Firearms" method="_on_item_selected"]
 [connection signal="item_selected" from="UI/ObjectList/Livings" to="UI/ObjectList/Livings" method="_on_item_selected"]
 [connection signal="item_selected" from="UI/ObjectList/Technology" to="UI/ObjectList/Technology" method="_on_item_selected"]
-[connection signal="item_selected" from="UI/ToolList" to="UI/ToolList" method="_on_item_selected"]
 [connection signal="body_entered" from="Cursor/Area2D" to="Cursor" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Cursor/Area2D" to="Cursor" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="JointCreator/Area2D" to="JointCreator" method="_on_area_2d_body_entered"]
