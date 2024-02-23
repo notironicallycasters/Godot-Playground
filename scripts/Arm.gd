@@ -15,9 +15,9 @@ func _physics_process(delta):
 
 
 func _on_area_2d_body_entered(body):
-	if not "Godot" in str(body.get_parent()) and not body is StaticBody2D:
+	if not "Godot" in str(body.get_parent()) and not body is StaticBody2D and not activated:
 		object = body
 
 func _on_area_2d_body_exited(body):
-	if not "Godot" in str(body.get_parent()) and not body is StaticBody2D:
+	if not "Godot" in str(body.get_parent()) and not body is StaticBody2D and not activated:
 		object = null

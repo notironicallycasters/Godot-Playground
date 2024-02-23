@@ -12,13 +12,17 @@ var fired = false
 @onready var timer = $Timer
 @onready var Light = $Light
 @onready var Raycast = $RayCast2D
+@onready var Particles = $CPUParticles2D
+@onready var Shooting = $Shooting
 
 
 func _physics_process(delta):
 	#Shooting
 	if activated:
+		Particles.emitting = true
 		timer.paused = false
 	else:
+		Particles.emitting = false
 		timer.paused = true
 		Light.visible = false
 		Raycast.enabled = false
@@ -39,6 +43,8 @@ func _on_timer_timeout():
 	if fired:
 		Light.visible = true
 		Raycast.enabled = true
+		Shooting.play()
+		Shooting.pitch_scale = randf_range(0.9,1.2)
 		fired = false
 	elif not fired:
 		Light.visible = false
