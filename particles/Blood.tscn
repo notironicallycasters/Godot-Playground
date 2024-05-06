@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpnhem1y8n7r7"]
+
+[sub_resource type="Curve" id="Curve_usggj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="GPUParticles2D" type="CPUParticles2D"]
+z_index = 100
+amount = 16
+lifetime = 5.0
+speed_scale = 5.0
+explosiveness = 0.1
+randomness = 0.18
+lifetime_randomness = 0.12
+spread = 0.0
+gravity = Vector2(0, 98)
+angle_max = 360.0
+scale_amount_min = 40.0
+scale_amount_max = 40.0
+scale_amount_curve = SubResource("Curve_usggj")
+color = Color(0, 0, 0.0941176, 1)
