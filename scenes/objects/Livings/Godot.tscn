@@ -1,10 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://mcb7tcepdwud"]
+[gd_scene load_steps=22 format=3 uid="uid://mcb7tcepdwud"]
 
 [ext_resource type="Script" path="res://scripts/Head.gd" id="1_6bsug"]
 [ext_resource type="Texture2D" uid="uid://csnehccfr0235" path="res://assets/Head.png" id="1_sy5yi"]
 [ext_resource type="Script" path="res://scripts/Arm.gd" id="3_2yply"]
 [ext_resource type="Script" path="res://scripts/Config.gd" id="3_46r55"]
+[ext_resource type="Script" path="res://scripts/AvoidCollision.gd" id="3_b7abs"]
+[ext_resource type="Script" path="res://scripts/AvoidCollisionArm.gd" id="4_6ocu0"]
+[ext_resource type="Script" path="res://scripts/Articulation.gd" id="4_qnikx"]
 [ext_resource type="AudioStream" uid="uid://dck5gojnl86b5" path="res://sounds/ImpactMetal.wav" id="5_gfb2m"]
+[ext_resource type="PackedScene" uid="uid://dpnhem1y8n7r7" path="res://particles/Blood.tscn" id="5_lg8af"]
+[ext_resource type="Texture2D" uid="uid://criwv6nuivcxy" path="res://icon.svg" id="6_cgj1n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_myyca"]
 radius = 161.0
@@ -40,7 +45,7 @@ radius = 78.0
 [node name="Godot" type="Node2D"]
 
 [node name="Head" type="RigidBody2D" parent="."]
-position = Vector2(0, -801)
+position = Vector2(0, -789)
 mass = 5.0
 script = ExtResource("1_6bsug")
 
@@ -95,9 +100,10 @@ mesh = SubResource("CapsuleMesh_q7gf2")
 [node name="Leg1" type="RigidBody2D" parent="."]
 z_index = -1
 position = Vector2(0, 224)
-collision_layer = 0
+collision_layer = 5
 collision_mask = 5
 mass = 10.5
+script = ExtResource("3_b7abs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leg1"]
 shape = SubResource("RectangleShape2D_v7nfx")
@@ -124,9 +130,10 @@ mesh = SubResource("CapsuleMesh_3dcq6")
 [node name="Leg2" type="RigidBody2D" parent="."]
 z_index = -1
 position = Vector2(0, 636)
-collision_layer = 0
-collision_mask = 9
-mass = 6.0
+collision_layer = 5
+collision_mask = 5
+mass = 12.0
+script = ExtResource("3_b7abs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leg2"]
 shape = SubResource("RectangleShape2D_xpaen")
@@ -176,9 +183,10 @@ target_position = Vector2(0, 1)
 modulate = Color(0.8, 0.8, 0.8, 1)
 z_index = -2
 position = Vector2(0, 224)
-collision_layer = 0
+collision_layer = 5
 collision_mask = 5
 mass = 10.5
+script = ExtResource("3_b7abs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leg3"]
 shape = SubResource("RectangleShape2D_v7nfx")
@@ -206,9 +214,10 @@ mesh = SubResource("CapsuleMesh_3dcq6")
 modulate = Color(0.8, 0.8, 0.8, 1)
 z_index = -2
 position = Vector2(0, 636)
-collision_layer = 0
-collision_mask = 9
-mass = 6.0
+collision_layer = 5
+collision_mask = 5
+mass = 12.0
+script = ExtResource("3_b7abs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leg4"]
 shape = SubResource("RectangleShape2D_xpaen")
@@ -257,9 +266,10 @@ target_position = Vector2(0, 1)
 [node name="Arm1" type="RigidBody2D" parent="."]
 z_index = 1
 position = Vector2(0, -312)
-collision_layer = 0
-collision_mask = 8
+collision_layer = 5
+collision_mask = 5
 mass = 10.5
+script = ExtResource("4_6ocu0")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm1"]
@@ -276,9 +286,9 @@ end_cap_mode = 2
 [node name="Arm2" type="RigidBody2D" parent="."]
 z_index = 1
 position = Vector2(0, -41)
-collision_layer = 0
-collision_mask = 4
-mass = 6.0
+collision_layer = 5
+collision_mask = 5
+mass = 12.0
 script = ExtResource("3_2yply")
 metadata/_edit_group_ = true
 
@@ -289,6 +299,7 @@ shape = SubResource("RectangleShape2D_i2hbv")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Arm2"]
 position = Vector2(0, 100)
 shape = SubResource("CircleShape2D_tyxmv")
+disabled = true
 
 [node name="Line2D" type="Line2D" parent="Arm2"]
 points = PackedVector2Array(0, -200, 0, 70)
@@ -318,9 +329,10 @@ shape = SubResource("CircleShape2D_tyxmv")
 modulate = Color(0.8, 0.8, 0.8, 1)
 z_index = -1
 position = Vector2(0, -312)
-collision_layer = 0
-collision_mask = 8
+collision_layer = 5
+collision_mask = 5
 mass = 10.5
+script = ExtResource("4_6ocu0")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm3"]
@@ -338,9 +350,9 @@ end_cap_mode = 2
 modulate = Color(0.8, 0.8, 0.8, 1)
 z_index = -1
 position = Vector2(0, -41)
-collision_layer = 0
-collision_mask = 4
-mass = 6.0
+collision_layer = 5
+collision_mask = 5
+mass = 12.0
 script = ExtResource("3_2yply")
 metadata/_edit_group_ = true
 
@@ -351,6 +363,7 @@ shape = SubResource("RectangleShape2D_i2hbv")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Arm4"]
 position = Vector2(0, 100)
 shape = SubResource("CircleShape2D_tyxmv")
+disabled = true
 
 [node name="Line2D" type="Line2D" parent="Arm4"]
 points = PackedVector2Array(0, -200, 0, 70)
@@ -377,12 +390,20 @@ position = Vector2(0, 100)
 shape = SubResource("CircleShape2D_tyxmv")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
-position = Vector2(0, -613)
+position = Vector2(0, -601)
 scale = Vector2(2, 2)
 node_a = NodePath("../Head")
 node_b = NodePath("../Body1")
 disable_collision = false
 softness = 0.05
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D" instance=ExtResource("5_lg8af")]
+emitting = false
+
+[node name="Sprite2D" type="Sprite2D" parent="PinJoint2D"]
+visible = false
+texture = ExtResource("6_cgj1n")
 
 [node name="PinJoint2D2" type="PinJoint2D" parent="."]
 position = Vector2(0, -375)
@@ -391,6 +412,10 @@ node_a = NodePath("../Body1")
 node_b = NodePath("../Body2")
 disable_collision = false
 softness = 0.05
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D2" instance=ExtResource("5_lg8af")]
+emitting = false
 
 [node name="PinJoint2D3" type="PinJoint2D" parent="."]
 position = Vector2(0, -151)
@@ -399,6 +424,10 @@ node_a = NodePath("../Body2")
 node_b = NodePath("../Body3")
 disable_collision = false
 softness = 0.05
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D3" instance=ExtResource("5_lg8af")]
+emitting = false
 
 [node name="PinJoint2D4" type="PinJoint2D" parent="."]
 position = Vector2(0, 81)
@@ -408,6 +437,10 @@ node_b = NodePath("../Leg1")
 softness = 0.05
 angular_limit_enabled = true
 angular_limit_lower = -1.5708
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D4" instance=ExtResource("5_lg8af")]
+emitting = false
 
 [node name="PinJoint2D5" type="PinJoint2D" parent="."]
 position = Vector2(0, 424)
@@ -417,6 +450,10 @@ node_b = NodePath("../Leg2")
 softness = 0.05
 angular_limit_enabled = true
 angular_limit_upper = 1.5708
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D5" instance=ExtResource("5_lg8af")]
+emitting = false
 
 [node name="PinJoint2D6" type="PinJoint2D" parent="."]
 position = Vector2(0, 81)
@@ -426,6 +463,10 @@ node_b = NodePath("../Leg3")
 softness = 0.05
 angular_limit_enabled = true
 angular_limit_lower = -1.5708
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D6" instance=ExtResource("5_lg8af")]
+emitting = false
 
 [node name="PinJoint2D7" type="PinJoint2D" parent="."]
 position = Vector2(0, 424)
@@ -435,32 +476,56 @@ node_b = NodePath("../Leg4")
 softness = 0.05
 angular_limit_enabled = true
 angular_limit_upper = 1.5708
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D7" instance=ExtResource("5_lg8af")]
+emitting = false
 
 [node name="PinJoint2D8" type="PinJoint2D" parent="."]
 position = Vector2(0, -488)
 node_a = NodePath("../Body1")
 node_b = NodePath("../Arm1")
 angular_limit_upper = 3.14159
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D8" instance=ExtResource("5_lg8af")]
+emitting = false
 
 [node name="PinJoint2D9" type="PinJoint2D" parent="."]
 position = Vector2(0, -488)
 node_a = NodePath("../Body1")
 node_b = NodePath("../Arm3")
 angular_limit_upper = 3.14159
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D9" instance=ExtResource("5_lg8af")]
+emitting = false
 
 [node name="PinJoint2D10" type="PinJoint2D" parent="."]
 position = Vector2(0, -260)
 node_a = NodePath("../Arm1")
 node_b = NodePath("../Arm2")
 angular_limit_enabled = true
-angular_limit_upper = 1.5708
+angular_limit_upper = -1.5708
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D10" instance=ExtResource("5_lg8af")]
+emitting = false
 
 [node name="PinJoint2D11" type="PinJoint2D" parent="."]
 position = Vector2(0, -260)
 node_a = NodePath("../Arm3")
 node_b = NodePath("../Arm4")
 angular_limit_enabled = true
-angular_limit_upper = 1.5708
+angular_limit_upper = -1.5708
+script = ExtResource("4_qnikx")
+
+[node name="GPUParticles2D" parent="PinJoint2D11" instance=ExtResource("5_lg8af")]
+emitting = false
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 
 [node name="Config" type="Node2D" parent="."]
 script = ExtResource("3_46r55")
@@ -473,3 +538,4 @@ stream = ExtResource("5_gfb2m")
 [connection signal="body_exited" from="Arm2/Area2D" to="Arm2" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="Arm4/Area2D" to="Arm4" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Arm4/Area2D" to="Arm4" method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="Head" method="_on_timer_timeout"]
