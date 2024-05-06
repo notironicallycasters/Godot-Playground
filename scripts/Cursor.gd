@@ -8,15 +8,18 @@ var selected_path
 var deleted = false
 var was_axis_lock = false
 var flip = false
+var hide = false
 
 
-func _process(delta):
+func _process(_delta):
+	if Input.is_action_just_pressed("esc"):
+		get_tree().quit()
 	#If drag is selected
 	if get_parent().get_node("UI/ToolList").selected == 0:
 		#Go to mouse cursor
 		position = get_global_mouse_position()
 		#Drag the object
-		if Input.is_action_pressed("left_click") and is_there_object and not deleted:
+		if Input.is_action_pressed("left_click") and is_there_object and not deleted and is_instance_valid(object):
 			$PinJoint2D.node_b = object.get_path()
 			#Rotation
 			if Input.is_action_pressed("Q"):

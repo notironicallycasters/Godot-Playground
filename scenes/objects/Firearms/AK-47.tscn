@@ -1,9 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://cuq8j1x8pxahc"]
+[gd_scene load_steps=21 format=3 uid="uid://cuq8j1x8pxahc"]
 
 [ext_resource type="Texture2D" uid="uid://d0pjmsrn26y13" path="res://assets/Fichier 2.svg" id="1_5tigv"]
 [ext_resource type="Script" path="res://scripts/AK-47.gd" id="1_ijnw6"]
 [ext_resource type="AudioStream" uid="uid://ual3vx5l21ds" path="res://sounds/AK-47Shoot.wav" id="3_187nj"]
+[ext_resource type="Script" path="res://scripts/RayCastDebug.gd" id="3_gcybi"]
 [ext_resource type="Script" path="res://scripts/Config.gd" id="3_ubxce"]
+[ext_resource type="Texture2D" uid="uid://criwv6nuivcxy" path="res://icon.svg" id="4_3t2y2"]
 [ext_resource type="AudioStream" uid="uid://dck5gojnl86b5" path="res://sounds/ImpactMetal.wav" id="4_odlov"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_akhw3"]
@@ -63,7 +65,7 @@ scale = Vector2(200, 200)
 texture = SubResource("GradientTexture2D_54nrk")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.025
+wait_time = 0.03
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -123,14 +125,23 @@ texture = ExtResource("1_5tigv")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(435, -81)
 scale = Vector2(4, 4)
-enabled = false
-target_position = Vector2(400000, 0)
+target_position = Vector2(4000, 0)
+collision_mask = 4294967295
+collide_with_areas = true
+script = ExtResource("3_gcybi")
+
+[node name="Sprite2D" type="Sprite2D" parent="RayCast2D"]
+visible = false
+top_level = true
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_3t2y2")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(-65, -85)
 emitting = false
 amount = 32
-lifetime = 2.0
+lifetime = 4.0
+speed_scale = 2.0
 direction = Vector2(-1, 0)
 spread = 0.0
 initial_velocity_min = 150.0
@@ -142,6 +153,7 @@ color = Color(1, 0.803922, 0, 1)
 [node name="Shooting" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(435, -81)
 stream = ExtResource("3_187nj")
+max_distance = 20000.0
 
 [node name="Config" type="Node2D" parent="."]
 script = ExtResource("3_ubxce")

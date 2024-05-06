@@ -1,9 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://b6ern7b3c6sk"]
+[gd_scene load_steps=33 format=3 uid="uid://b6ern7b3c6sk"]
 
 [ext_resource type="FontFile" uid="uid://c5sc82cyc24ae" path="res://fonts/CorwinCollege.otf" id="2_dj3hu"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="2_hgvlv"]
 [ext_resource type="Script" path="res://scripts/Select.gd" id="2_mfapq"]
-[ext_resource type="Script" path="res://scenes/maps/UI.gd" id="2_n5q63"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="2_n5q63"]
 [ext_resource type="AudioStream" uid="uid://cmws3folv3wh8" path="res://sounds/Select.wav" id="3_7efuf"]
 [ext_resource type="Texture2D" uid="uid://bwu5nptx27jre" path="res://assets/ToolSelect.svg" id="3_stcpi"]
 [ext_resource type="Script" path="res://scripts/SelectSFX.gd" id="4_45w50"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://wio37yf2qnx5" path="res://sounds/Floodlight.wav" id="16_f4hgq"]
 [ext_resource type="Script" path="res://scripts/Floodlights.gd" id="17_s4cv8"]
 [ext_resource type="Script" path="res://scripts/Config.gd" id="18_m1p5l"]
+[ext_resource type="Script" path="res://scenes/maps/LightOff.gd" id="19_1gjvr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ypfsi"]
 shader = ExtResource("6_q7cs3")
@@ -38,6 +39,8 @@ font_size = 18
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mwabs"]
 radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0n5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0okwr"]
 size = Vector2(1, 1)
@@ -84,6 +87,7 @@ script = ExtResource("2_n5q63")
 
 [node name="Select" type="AudioStreamPlayer" parent="UI"]
 stream = ExtResource("3_7efuf")
+bus = &"UI"
 
 [node name="ToolList" type="ItemList" parent="UI"]
 z_index = 100
@@ -224,7 +228,7 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JointCreator/Area2D"]
-shape = SubResource("CircleShape2D_mwabs")
+shape = SubResource("CircleShape2D_e0n5q")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 z_index = 10
@@ -278,7 +282,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television/Frame"]
 layout_mode = 1
@@ -336,7 +340,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television2/Frame"]
 layout_mode = 1
@@ -394,7 +398,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television3/Frame"]
 layout_mode = 1
@@ -452,7 +456,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television4/Frame"]
 layout_mode = 1
@@ -510,7 +514,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television5/Frame"]
 layout_mode = 1
@@ -569,7 +573,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television6/Frame"]
 layout_mode = 1
@@ -627,7 +631,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television7/Frame"]
 layout_mode = 1
@@ -685,7 +689,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television8/Frame"]
 layout_mode = 1
@@ -743,7 +747,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television9/Frame"]
 layout_mode = 1
@@ -803,7 +807,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="TVOff" type="ColorRect" parent="Tutorial/32 Inches Television10/Frame"]
 layout_mode = 1
@@ -850,6 +854,7 @@ description = "The mascot of the godot engine. He can be used for all sort of ex
 [node name="Intro" type="Node2D" parent="."]
 
 [node name="LightOff" type="ColorRect" parent="Intro"]
+visible = false
 z_index = 100
 offset_left = -500000.0
 offset_top = -500008.0
@@ -857,10 +862,12 @@ offset_right = 500000.0
 offset_bottom = 499992.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+script = ExtResource("19_1gjvr")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Intro"]
 stream = ExtResource("16_f4hgq")
 volume_db = -16.0
+bus = &"UI"
 
 [node name="Timer" type="Timer" parent="Intro"]
 one_shot = true

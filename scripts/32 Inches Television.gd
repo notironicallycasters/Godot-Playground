@@ -6,10 +6,10 @@ extends RigidBody2D
 
 #Childs
 @onready var video = $Frame/VideoStreamPlayer
-@onready var audio = $Frame/Audio
+@onready var audio = $Audio
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	#Turn on or off
 	if activated:
 		if not video.is_playing():

@@ -1,10 +1,11 @@
 extends Camera2D
 
 var target_zoom = 2
+var zoom_far = 0.5
 const MIN_ZOOM = 0.002
 const MAX_ZOOM = 1000.0
 const ZOOM_INCREMENT = 0.05
-const ZOOM_RATE = 8.0
+const ZOOM_RATE = 10
 
 
 
@@ -30,5 +31,6 @@ func zoom_out():
 	set_physics_process(true)
 	
 func _physics_process(delta):
+	AudioServer.set_bus_volume_db(0,linear_to_db(zoom.x*4))
 	zoom = lerp(zoom,target_zoom * Vector2.ONE,ZOOM_RATE * delta)
 	set_physics_process(not is_equal_approx(zoom.x, target_zoom))

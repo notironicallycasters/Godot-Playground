@@ -6,7 +6,7 @@ extends Node2D
 @export var impact_sound = AudioStream
 
 @onready var impact_player = $AudioStreamPlayer2D
-@onready var text = $Velocity
+
 
 func _ready():
 	if is_instance_valid(impact_player):

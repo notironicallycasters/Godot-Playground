@@ -24,6 +24,14 @@ script = ExtResource("1_15ibn")
 scale = Vector2(710, 400)
 shape = SubResource("RectangleShape2D_k0b24")
 
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_4kcd4")
+max_distance = 20000.0
+
+[node name="Noise2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_mk8n7")
+max_distance = 20000.0
+
 [node name="Frame" type="ColorRect" parent="."]
 offset_left = -355.0
 offset_top = -200.0
@@ -31,10 +39,7 @@ offset_right = 355.0
 offset_bottom = 200.0
 size_flags_horizontal = 4
 mouse_filter = 2
-color = Color(0.333333, 0.333333, 0.333333, 1)
-
-[node name="Audio" type="AudioStreamPlayer" parent="Frame"]
-stream = ExtResource("5_4kcd4")
+color = Color(0.113725, 0.113725, 0.113725, 1)
 
 [node name="VisualNoise" type="ColorRect" parent="Frame"]
 visible = false
@@ -67,11 +72,6 @@ grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 color = Color(0.0666667, 0.0666667, 0.0666667, 1)
-
-[node name="Noise2" type="AudioStreamPlayer2D" parent="Frame"]
-position = Vector2(355, 200)
-stream = ExtResource("2_mk8n7")
-max_distance = 20000.0
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Frame"]
 layout_mode = 1

@@ -8,7 +8,7 @@ var target2 : Node2D
 
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if first_target:
 		target1 = get_node(first_target)
 	if second_target:
